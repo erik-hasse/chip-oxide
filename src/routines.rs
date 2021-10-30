@@ -3,6 +3,7 @@ use std::path::Path;
 
 use super::components::*;
 use super::instructions::*;
+use super::types::*;
 
 fn init_chip(data: [u8; 0xFFF]) -> Chip {
     Chip {
@@ -38,9 +39,5 @@ pub fn run(path: &Path) {
 
 fn step(chip: &mut Chip, instruction: Instruction) {
     chip.program_counter.0 += 2;
-    match instruction {
-        Instruction(0x00E0) => cls(chip),
-        Instruction(0x0000) => (),
-        _ => panic!("Unknown instruction {:?}", instruction),
-    };
+    call_instr(chip, instruction)
 }

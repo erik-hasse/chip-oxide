@@ -6,7 +6,10 @@ use routines::*;
 
 mod components;
 mod instructions;
+#[macro_use]
+mod macros;
 mod routines;
+mod types;
 
 fn main() {
     let commands = App::new("CHIP-Oxide")

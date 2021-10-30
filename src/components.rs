@@ -22,7 +22,7 @@ pub struct Stack(pub [Addr; 0x10]);
 pub struct Instruction(pub u16);
 
 #[derive(Debug)]
-pub struct Chip  {
+pub struct Chip {
     pub memory: Memory,
     pub registers: Registers,
     pub register_i: RegisterI,
@@ -39,7 +39,7 @@ impl Memory {
     pub fn get_instruction(&self, addr: Addr) -> Instruction {
         Instruction(
             (self.0[addr.0 as usize] as u16) << 8
-            | self.0[addr.0 as usize + 1] as u16
+                | self.0[addr.0 as usize + 1] as u16,
         )
     }
 }

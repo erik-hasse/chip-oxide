@@ -6,8 +6,6 @@ use routines::*;
 
 mod components;
 mod instructions;
-#[macro_use]
-mod macros;
 mod routines;
 mod types;
 
@@ -23,8 +21,21 @@ fn main() {
                 .required(true)
                 .takes_value(true),
         )
+        .arg(
+            Arg::with_name("leading_zeros")
+                .long("zeros")
+                .short("z")
+                .help("Input binary has leading zeros")
+        )
+        .arg(
+            Arg::with_name("verbose")
+                .short("v")
+                .help("Print program state")
+        )
         .get_matches();
 
     let file_path = Path::new(commands.value_of("binary").unwrap());
-    run(file_path);
+    let leading_zeros = commands.is_present("leading_zeros");
+    let verbose = commands.is_present("verbose");
+    run(file_path, leading_zeros, verbose);
 }
